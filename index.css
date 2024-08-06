@@ -1,0 +1,362 @@
+*{
+    margin: 0px;
+}
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(23, 24, 29);
+}
+.contenedor{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.form{
+    background-color: rgb(240, 240, 240);
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+
+}
+
+button{
+    border: none;
+    background-color: rgb(236, 86, 81);
+    padding: 13px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #ff0000;
+
+}
+
+.form input{
+
+    margin: 5px 0;
+    padding: 5px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="submit"]{
+    border: none;
+    background-color: rgb(65, 65, 189);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+#eventsContainer{
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 1px;
+    width: 600px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.event{
+    background-color:rgb(77, 79, 204);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    text-align: center;
+    width: 800px;
+}
+
+.event .days{
+    text-align: center;
+    width: 100px;
+}
+.days{
+    background-color: rgb(92, 197, 101);
+    padding: 5px;
+    border-radius: 4px;
+   
+}
+.event .days .days-number{
+
+    font-size: 30px;
+    font-weight: bold;
+    display: block;
+}
+
+.event .event-name{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    width: 300px;
+  
+}
+
+.event .event-date{
+  
+    padding: 20px;
+    width: 300px;
+}
+
+.time-number{
+   
+    align-items: center;
+text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+ 
+}
+
+.time{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 350px;
+    background-color: rgb(228, 225, 225);
+    border-radius: 5px;
+    padding: 10px;
+    align-items: center;
+   
+
+}
+
+.time-text{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.vacio{
+    text-align: center;
+    font-size: 10px;
+}
+
+ .fc {
+    padding: 20px;
+    width: 100%;
+    background-color: #37398a; /* Color de fondo del calendario */
+    border-radius: 10px;
+}
+
+.fc-col-header-cell {
+    background-color: #ffffff; /* Color de fondo de los encabezados de columna */
+    color: #000000; /* Color del texto de los encabezados */
+}
+
+
+.fc-event {
+    border-radius: 5px; /* Esquinas redondeadas de los eventos */
+    padding: 5px 5px; /* Espaciado dentro del evento */
+    font-size: 14px; /* Tamaño de la fuente del evento */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.fc-event.fc-event-solid {
+    background-color: #ff0000; /* Color de fondo de los eventos */
+    color: #141212; /* Color del texto de los eventos */
+}
+
+.fc-day-header {
+    background-color: #007bff; /* Color de fondo de los días de la semana */
+    color: #ffffff; /* Color del texto de los días de la semana */
+    font-weight: bold; /* Negrita en el texto de los días de la semana */
+} 
+
+.fc-daygrid-day {
+    background-color: #ffffff; /* Color de fondo de los días del mes */
+}
+
+.fc-daygrid-day-number {
+    color: #007bff; /* Color del número del día */
+}
+
+header{
+    width: 100%;
+    height: 70px;
+    background-color: #007bff;
+    margin-bottom: 20px;
+}
+
+
+.large-icon {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+    cursor: pointer;
+    
+    font-size: 3rem; /* Puedes ajustar el tamaño según tus necesidades */
+}
+nav{
+    padding: 1rem;
+    display: flex;
+    background-color: rgb(69, 71, 206);
+  }
+.screen{
+    height: 50px;
+    width: 50px;
+margin-left: auto;
+position: relative;
+z-index: 1100; /* Asegúrate de que screen tenga un nivel alto */
+}
+
+
+.oof-screen{
+    background-color: rgb(69, 71, 206);
+    color: aliceblue;
+    height: 100vh;
+    width: 100%;
+    max-width: 450px;
+    position: fixed;
+    top: 0;
+    right: -450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: .3s ease;
+    z-index: 1050; /* Asegúrate de que tenga un z-index alto */
+   
+  /* Asegúrate de que tenga un z-index alto */
+}
+
+.oof-screen.active{
+    right: 0;
+}
+
+.active{
+    right: 0;
+}
+
+.hamburguer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 30px;
+    font-size: 20px;
+    text-decoration: none;
+    list-style-type: none;
+    cursor: pointer;
+    z-index: 1060; /* Asegúrate de que tenga un z-index alto */
+    
+
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .form {
+        width: 100%;
+    }
+
+    #eventsContainer {
+        width: 250px;
+        margin: 20px auto;
+    }
+
+    .time {
+        width: 100%;
+    }
+
+    .large-icon {
+        font-size: 2.5rem; /* Ajustar el tamaño del icono en pantallas más pequeñas */
+    }
+
+    .hamburguer {
+        font-size: 1.5rem; /* Ajustar el tamaño del texto del menú en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .large-icon {
+        font-size: 2rem; /* Ajustar el tamaño del icono en pantallas muy pequeñas */
+    }
+
+    .hamburguer {
+        font-size: 1.2rem; /* Ajustar el tamaño del texto del menú en pantallas muy pequeñas */
+    }
+
+    .event {
+        flex-direction: column;
+        text-align: center;
+        width: 350px;
+    }
+
+    .event .event-name,
+    .event .event-date {
+        width: 100%;
+    }
+
+    .time{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        width: 350px;
+        background-color: rgb(228, 225, 225);
+       
+        padding: 10px;
+        align-items: center;
+    
+    }
+    
+    .time-text{
+        text-align: center;
+        font-size: 10px;
+        font-weight: bold;
+    }
+    .time-number{
+        align-items: center;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold; 
+    }
+
+    .time-numbers{
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+
+    .form input{
+        display: flex;
+        align-items: center;
+        text-align: center;
+    
+        margin: 5px 0;
+        padding: 5px;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(240, 240, 240);
+        padding: 20px;
+        width: 300px;
+        margin: 0 auto;
+        border-radius: 5px;
+    
+    }
+}
