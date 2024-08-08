@@ -13,7 +13,8 @@ const offscreen=document.querySelector(".oof-screen")
 const bDelete=document.querySelector(".bDelete")
 
 
-buttonAdd.addEventListener("click",()=>{
+
+buttonAdd.addEventListener("click",(e)=>{
 
     if(eventName.value===""){
         Swal.fire({
@@ -38,13 +39,19 @@ buttonAdd.addEventListener("click",()=>{
     }
 })
 
-
-
-
 btn.addEventListener("click",()=>{
     offscreen.classList.toggle("active")
 
 })
+
+/* 
+btnMenu.addEventListener("click", () => {
+    menuScreen.classList.toggle("active");
+});
+addEventButton.addEventListener("click", () => {
+    eventForm.classList.toggle("active");
+    offscreen.classList.remove("active");
+}); */
 
 // Función para obtener el clima de un evento
 async function getWeather(eventDate) {
@@ -80,20 +87,22 @@ async function getWeather(eventDate) {
     }
 }
 
+
+
 // Inicializar FullCalendar
 const calendarEl = document.getElementById('calendar');
 const calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             timeZone: 'America/Argentina/Buenos_Aires', 
-            events: [], // Aquí se cargarán los eventos
+            events: [],
+         // Aquí se cargarán los eventos
             eventContent: function(info) {
-                // Personalizar el contenido del evento
                 const { event } = info;
                 return {
                     html: `
                     <div style="display: flex; align-items: center;">
-                    <span style="width: 10px; height: 10px; background-color: red; border-radius: 50%; display: inline-block; margin-right: 5px;"></span>
-                    <span>${event.title}</span>
+                    <span class="container-event" style="width: 8px; height: 8px; background-color: ${event.backgroundColor}; border-radius: 50%; display: inline-block; margin-right: 3px;"></span>
+                    <span class="event-title" >${event.title}</span>
                     </div>
                     `
                 };
@@ -124,6 +133,8 @@ setInterval(updateEventTimes, 1000); }// Actualizar cada segundo
 
 document.querySelector("form").addEventListener("submit",(e)=>{
     e.preventDefault();
+    addEvent(); // Asegúrate de llamar a addEvent() en el submit
+    
     
 });
 
@@ -141,12 +152,17 @@ async function addEvent() {
     // Obtener datos meteorológicos
     const weather = await getWeather(eventDate.value);
 
+    const color = document.querySelector("#eventColor").value;
+    console.log('Color del evento:', color); // Verifica el valor del color
+
     const newEvent = {
         id: (Math.random() * 100).toString(36).slice(3), // Genero un ID random
         name: eventName.value,
         date: eventDate.value,
         time:eventTime.value ||"00:00",
-        weather: weather // Añadir datos meteorológicos al evento
+        color: color, // Obtener color elegido
+        weather: weather,// Añadir datos meteorológicos al evento
+        
     };
 
     // Agregar un elemento al inicio del array
@@ -155,7 +171,7 @@ async function addEvent() {
     save(JSON.stringify(events));
 
     eventName.value = "";
-
+    console.log('Nuevo evento:', newEvent);
     renderEvents();
     updateCalendarEvents(); // Actualizar el calendario después de agregar un nuevo evento
 }
@@ -237,6 +253,7 @@ const difference = targetDateInArgentina.getTime() - todayInArgentina.getTime();
         seconds
     };
 }
+
 /* // Ejemplo de uso
 console.log(dateDiff("2024-08-03", "04:40")); */
 
@@ -251,10 +268,14 @@ function renderEvents() {
         `;
         return;
     }
+
     const eventsHTML=events.map(event=>{
         const diff = dateDiff(event.date,event.time);
+        console.log(`Color del evento (${event.id}): ${event.color}`);
+        const isNear = diff.totalMilliseconds <= (24 * 60 * 60 * 1000) && diff.totalMilliseconds >= 0;
+        const eventClass = isNear ? 'event-red' : 'event-custom'; // Usa clase CSS // Verifica el color
         return `
-        <div class="event" id="event-${event.id}">
+        <div class="event ${eventClass}" id="event-${event.id} style="border-left: 5px solid ${event.color}; background-color: ${event.color};">
             <div class="days">
                 <span class="days-number">${diff.days}</span>
                 <span class="days-text">días</span>
@@ -270,7 +291,15 @@ function renderEvents() {
                 
                 </div>
             </div>
-            <div class="event-name">${event.name}</div>
+            <div class="event-name"style="width:280px">
+             <div class="event-header" style="display: flex; align-items: center;">
+                <div class="color-circle" style="width: 10px; height: 8px; background-color: ${event.color}; border-radius: 50%; margin-right: 0px;margin-left:30px"></div>
+                <div class="event-name"style=>${event.name}</div>
+            </div>
+      
+            
+            
+            </div>
             <div class="event-date">${event.date}</div>
             <div class="event-time">${event.time}</div>
             ${event.weather ? `
@@ -329,6 +358,7 @@ function renderEvents() {
     
 }
 
+
 function updateEventTimes() {
     // Actualizar el tiempo restante de cada evento
     events.forEach(event => {
@@ -343,24 +373,43 @@ function updateEventTimes() {
     });
 }
 function updateCalendarEvents() {
-    // Limpiar eventos existentes
-    calendar.getEvents().forEach(event => event.remove());
+   calendar.getEvents().forEach(event => event.remove());
 
-    // Agregar eventos nuevos
-    calendar.addEventSource(events.map(event => ({
-        id: event.id,
-        title: event.name,
-        start: `${event.date}T${event.time}:00-03:00`,
-        allDay: false,
-        backgroundColor: '#ff9f00', // Color de fondo del evento
-        borderColor: '#ff9f00', // Color del borde del evento
-        textColor: '#000000' // Color del texto del evento
-    })));
+    // Obtener la fecha y hora actual
+    const now = new Date();
+
+    // Agregar eventos al calendario
+    calendar.addEventSource(events.map(event => {
+        // Crear un objeto Date con la fecha y hora del evento
+        const eventDateTime = new Date(`${event.date}T${event.time}:00-03:00`);
+        
+        // Calcular la diferencia en milisegundos
+        const timeDiff = eventDateTime - now;
+        
+        // Determinar si el evento está a un día o menos
+        const isNear = timeDiff <= (24 * 60 * 60 * 1000) && timeDiff >= 0; // 1 día en milisegundos
+
+        // Elegir el color de fondo según la proximidad del evento
+        const color = isNear ? 'red' : (event.color || '#ff9f00');
+
+        return {
+            id: event.id,
+            title: event.name,
+            start: `${event.date}T${event.time}:00-03:00`,
+            allDay: false,
+            backgroundColor: color, // Cambiar el color de fondo
+            borderColor: color,
+            textColor: '#000000' // Color del texto
+        };
+    }));
+
+    // Volver a renderizar el calendario
+    calendar.render();
 }
 
 
 
-
+loadEvents()
 function save(data) {
     localStorage.setItem("items",data);
     
@@ -380,5 +429,5 @@ window.addEventListener('load', () => {
 //Manejo del formulario para agregar eventos
 document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
-    addEvent();
+    
 }); 

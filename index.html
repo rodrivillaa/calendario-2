@@ -34,18 +34,21 @@
    
    
 </header>
-    <div class="contenedor"id="app">
-        <div class="form">
-            <form action="">
-                <input type="text" id="eventName">
-                <input type="date" id="eventDate">
-                <input type="time" id="eventTime">
-                <input type="submit" id="bAdd" value="añadir evento">
-            </form>
-        </div>
-        <div id="calendar"></div>
-        <div id="eventsContainer"></div>
+<div class="contenedor"id="app">
+    <div class="form">
+        <form action="">
+            <input type="text" id="eventName">
+            <input type="date" id="eventDate">
+            <input type="time" id="eventTime">
+            <input type="submit" id="bAdd" value="añadir evento">
+            
+        </form>
     </div>
+    <div id="calendar"></div>
+    <div id="eventsContainer"></div>
+    <button id="openForm" onclick="window.location.href='calendario.html'">+</button>
+</div>
+
      <!-- FullCalendar JS -->
      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>

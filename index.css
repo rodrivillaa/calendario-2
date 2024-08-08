@@ -1,6 +1,25 @@
 *{
     margin: 0px;
 }
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+
+
+
+.form{
+    background-color: rgb(240, 240, 240);
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+ /* Inicialmente oculto */
+    
+}
+
+
 
 
 body{
@@ -13,14 +32,6 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 20px;
-}
-.form{
-    background-color: rgb(240, 240, 240);
-    padding: 20px;
-    width: 300px;
-    margin: 0 auto;
-    border-radius: 5px;
-
 }
 
 button{
@@ -56,7 +67,7 @@ input[type="submit"]{
 }
 
 #eventsContainer{
-    background-color: rgb(255, 255, 255);
+    
     border-radius: 5px;
     padding: 1px;
     width: 600px;
@@ -69,7 +80,7 @@ input[type="submit"]{
 }
 
 .event{
-    background-color:rgb(77, 79, 204);
+    border:2px solid#007bff;
     border-radius: 5px;
     padding: 10px;
     display: flex;
@@ -79,15 +90,27 @@ input[type="submit"]{
     text-align: center;
     width: 800px;
 }
+.event-red {
+    /* Usa el rojo hexadecimal */
+  background-color: #ffffff;
+    border:2px solid #FF0000;
+    border-left: 5px solid #FF0000;
+}
+
+.event-custom {
+    border-left: 5px solid #007bff;
+}
 
 .event .days{
     text-align: center;
     width: 100px;
 }
 .days{
+    display: flex;
+    flex-direction: column;
     background-color: rgb(92, 197, 101);
-    padding: 5px;
-    border-radius: 4px;
+    border-radius: 5px;
+    padding: 6px;
    
 }
 .event .days .days-number{
@@ -127,7 +150,7 @@ text-align: center;
     text-align: center;
     align-items: center;
     width: 350px;
-    background-color: rgb(228, 225, 225);
+    background-color: rgb(255, 254, 254);
     border-radius: 5px;
     padding: 10px;
     align-items: center;
@@ -162,16 +185,14 @@ text-align: center;
 
 
 .fc-event {
+    background-color: inherit;
     border-radius: 5px; /* Esquinas redondeadas de los eventos */
     padding: 5px 5px; /* Espaciado dentro del evento */
     font-size: 14px; /* Tamaño de la fuente del evento */
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.fc-event.fc-event-solid {
-    background-color: #ff0000; /* Color de fondo de los eventos */
-    color: #141212; /* Color del texto de los eventos */
-}
+
 
 .fc-day-header {
     background-color: #007bff; /* Color de fondo de los días de la semana */
@@ -184,7 +205,7 @@ text-align: center;
 }
 
 .fc-daygrid-day-number {
-    color: #007bff; /* Color del número del día */
+
 }
 
 header{
@@ -258,7 +279,10 @@ z-index: 1100; /* Asegúrate de que screen tenga un nivel alto */
     
 
 }
-
+.actions{
+    border-radius: 5px;
+    padding: 10px;
+}
 /* Media Queries */
 @media (max-width: 768px) {
     .form {
@@ -284,79 +308,172 @@ z-index: 1100; /* Asegúrate de que screen tenga un nivel alto */
 }
 
 @media (max-width: 480px) {
-    .large-icon {
-        font-size: 2rem; /* Ajustar el tamaño del icono en pantallas muy pequeñas */
+    .days{
+        display: flex;
+        flex-direction: column;
+        width: 500px;
     }
-
+    #addEventButton { 
+        width: 50px; 
+        height: 50px; 
+        background: #28a745; 
+        color: #fff; 
+        border-radius: 50%; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        font-size: 24px; 
+        cursor: pointer; 
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px;
+        z-index: 1100; /* Asegúrate de que esté encima de otros elementos */
+    }
+    
+    /* Estilos para el menú hamburguesa */
+    .oof-screen {
+        background-color: rgb(69, 71, 206);
+        color: aliceblue;
+        height: 100vh;
+        width: 100%;
+        max-width: 450px;
+        position: fixed;
+        top: 0;
+        right: -450px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: .3s ease;
+        z-index: 1050; /* Asegúrate de que tenga un z-index alto */
+    }
+    
+    .oof-screen.active {
+        right: 0;
+    }
+    
     .hamburguer {
-        font-size: 1.2rem; /* Ajustar el tamaño del texto del menú en pantallas muy pequeñas */
-    }
-
-    .event {
-        flex-direction: column;
-        text-align: center;
-        width: 350px;
-    }
-
-    .event .event-name,
-    .event .event-date {
-        width: 100%;
-    }
-
-    .time{
         display: flex;
         flex-direction: column;
-        justify-content: center;
         text-align: center;
         align-items: center;
-        width: 350px;
-        background-color: rgb(228, 225, 225);
-       
-        padding: 10px;
-        align-items: center;
-    
+        gap: 30px;
+        font-size: 20px;
+        list-style-type: none;
+        cursor: pointer;
+        z-index: 1060; /* Asegúrate de que tenga un z-index alto */
     }
     
-    .time-text{
-        text-align: center;
-        font-size: 10px;
-        font-weight: bold;
-    }
-    .time-number{
-        align-items: center;
-        text-align: center;
-        font-size: 30px;
-        font-weight: bold; 
-    }
-
-    .time-numbers{
-        display: flex;
-        align-items: center;
-        text-align: center;
-    }
-
-
-    .form input{
-        display: flex;
-        align-items: center;
-        text-align: center;
-    
-        margin: 5px 0;
-        padding: 5px;
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .form{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    /* Estilos para el formulario */
+    .form {
         background-color: rgb(240, 240, 240);
         padding: 20px;
-        width: 300px;
-        margin: 0 auto;
+        width: 100%;
+        max-width: 300px;
+        margin: 20px auto;
         border-radius: 5px;
-    
+        display: none; /* Inicialmente oculto */
     }
+    
+    .form.active {
+        display: block;
+    }
+    .event-red {
+        background-color: red;
+        border-left: 5px solid red;
+    }
+    
+    /* Estilos para los eventos */
+    #eventsContainer {
+        background-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .event {
+        background-color: rgb(250, 248, 248);
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        max-width: 800px;
+    }
+    
+    .time {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+        background-color: rgb(248, 248, 248);
+        border-radius: 5px;
+        padding: 10px;
+    }
+    
+    /* Ajustes para pantallas pequeñas */
+    @media (max-width: 768px) {
+        .form {
+            width: 90%;
+        }
+    
+        #eventsContainer {
+            width: 90%;
+            margin: 20px auto;
+        }
+    
+        .event {
+            width: 90%;
+        }
+    
+        .large-icon {
+            font-size: 2.5rem; /* Ajustar el tamaño del icono en pantallas más pequeñas */
+        }
+    
+        .hamburguer {
+            font-size: 1.5rem; /* Ajustar el tamaño del texto del menú en pantallas más pequeñas */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        #calendar {
+            font-size: 10px;
+            width: 100%;
+        }
+    
+        .large-icon {
+            font-size: 2rem; /* Ajustar el tamaño del icono en pantallas muy pequeñas */
+        }
+    
+        .hamburguer {
+            font-size: 1.2rem; /* Ajustar el tamaño del texto del menú en pantallas muy pequeñas */
+        }
+    
+        .event {
+            width: 100%;
+            padding: 10px;
+        }
+    
+        .time {
+            width: 100%;
+            padding: 5px;
+        }
+    
+        .form input {
+            margin: 5px 0;
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+
+
 }
