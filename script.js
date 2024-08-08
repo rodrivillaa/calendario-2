@@ -309,7 +309,7 @@ function renderEvents() {
             </div>
             ` : ''}
             <div class="actions">
-                <button class="bDelete" data-id="${event.id}">Eliminar</button>
+                <button class="bDelete" data-id="${event.id}"><i class="bi bi-trash custom-icon"></i></button>
             </div>
         </div>
         

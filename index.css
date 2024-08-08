@@ -5,11 +5,15 @@
     max-width: 900px;
     margin: 0 auto;
 }
-
+img{
+    width: 50px;
+    
+}
 
 
 
 .form{
+    display: none;
     background-color: rgb(240, 240, 240);
     padding: 20px;
     width: 300px;
@@ -18,8 +22,33 @@
  /* Inicialmente oculto */
     
 }
+.btn-container{
+    position: relative; /* Contenedor relativo para posicionar el botón */
+    padding: 10px; /* Opcional: agregar espacio alrededor del contenedor */
+    margin-bottom: 200px;
+}
+.btn-open{
 
 
+    position: fixed;  /* Fija el botón en la ventana del navegador */
+    right: 20px;      /* Distancia desde el borde derecho */
+    bottom: 20px;     /* Distancia desde el borde inferior */
+    font-size: 24px;
+    padding: 15px;
+    background-color: #4F4CFC;
+    color: white;
+    border: none;
+    border-radius: 20%;
+    width: 80px;
+    height: 65px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Añade una sombra para destacarlo */
+    z-index: 1000;    /* Asegura que esté por encima de otros elementos */
+}
+
+.btn-open:hover{
+    background-color: #3835f5;
+}
 
 
 body{
@@ -33,20 +62,33 @@ body{
     align-items: center;
     gap: 20px;
 }
+.custom-icon {
+    color: #e03030;           /* Cambia el color del ícono */
+    font-size: 30px;          /* Cambia el tamaño del ícono */
+    transition: transform 0.3s ease, color 0.3s ease;  /* Transición para hover */
+}
 
+.custom-icon:hover {
+    color: #b33838;           /* Cambia el color al hacer hover */
+    transform: scale(1.2);    /* Aumenta el tamaño al hacer hover */
+}
+.custom-i{
+    color: #ffffff;
+}
+i{
+   color: #cc2e2e;
+}
 button{
+    background-color: transparent;
     border: none;
-    background-color: rgb(236, 86, 81);
+  
     padding: 13px;
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover{
-    background-color: #ff0000;
 
-}
 
 .form input{
 
@@ -89,6 +131,7 @@ input[type="submit"]{
     justify-content: center;
     text-align: center;
     width: 800px;
+    box-shadow: 0 4px 8px rgba(179, 179, 179, 0.801); /* Sombra blanca */
 }
 .event-red {
     /* Usa el rojo hexadecimal */
@@ -219,8 +262,12 @@ header{
 .large-icon {
     display: flex;
     justify-content: end;
-    padding: 10px;
+    
     cursor: pointer;
+    color: #fff;
+    align-items: center;
+    text-align: center;
+   
     
     font-size: 3rem; /* Puedes ajustar el tamaño según tus necesidades */
 }
@@ -229,7 +276,13 @@ nav{
     display: flex;
     background-color: rgb(69, 71, 206);
   }
+  .logo{
+    display: flex;
+    align-items: center;
+   
+  }
 .screen{
+   
     height: 50px;
     width: 50px;
 margin-left: auto;
@@ -277,6 +330,10 @@ z-index: 1100; /* Asegúrate de que screen tenga un nivel alto */
     cursor: pointer;
     z-index: 1060; /* Asegúrate de que tenga un z-index alto */
     
+
+}
+.bi bi-trash{
+font-weight: 50px;
 
 }
 .actions{
