@@ -12,15 +12,52 @@ const btn=document.querySelector("#btn")
 const offscreen=document.querySelector(".oof-screen")
 const bDelete=document.querySelector(".bDelete")
 
+document.addEventListener('DOMContentLoaded', function() {
+    const apiKey = 'ifamTbyBuzrl0n8BgPkqsjToHBRttsmB';  // Sustituye con tu clave API
+    const year = 2024;              // Año para el cual deseas obtener los feriados
+    const country = 'AR';           // Código del país (ejemplo: 'US' para Estados Unidos)
 
+    // Función para obtener los feriados de la API
+    function fetchHolidays() {
+        fetch(`https://calendarific.com/api/v2/holidays?api_key=${apiKey}&country=${country}&year=${year}`)
+            .then(response => response.json())
+            .then(data => {
+                displayHolidays(data.response.holidays);
+            })
+            .catch(error => console.error('Error fetching holidays:', error));
+    }
+
+    // Función para mostrar los feriados en el DOM
+    function displayHolidays(holidays) {
+        const container = document.getElementById('holidays-container');
+        container.innerHTML = ''; // Limpiar el contenido previo
+
+        if (holidays.length === 0) {
+            container.innerHTML = '<p>No hay feriados disponibles para este año.</p>';
+            return;
+        }
+
+        const list = document.createElement('ul');
+        holidays.forEach(holiday => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${holiday.date.iso}: ${holiday.name}`;
+            list.appendChild(listItem);
+        });
+
+        container.appendChild(list);
+    }
+
+    // Llamar a la función para obtener y mostrar los feriados
+    fetchHolidays();
+});
 
 buttonAdd.addEventListener("click",(e)=>{
 
-    if(eventName.value===""){
+    if(eventName.value && eventDate.value===""){
         Swal.fire({
             position: "center",
             icon: "warning",
-            title: "Por favor añade un nombre al evento",
+            title: "Por favor completa todos los campos!",
             showConfirmButton: false,
             timer: 1500
           });
