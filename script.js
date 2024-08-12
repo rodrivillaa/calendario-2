@@ -19,13 +19,59 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Función para obtener los feriados de la API
     function fetchHolidays() {
-        fetch(`https://calendarific.com/api/v2/holidays?api_key=${apiKey}&country=${country}&year=${year}`)
+        fetch(`https://calendarific.com/api/v2/holidays?api_key=${apiKey}&country=${country}&year=${year}&language=es`)
             .then(response => response.json())
             .then(data => {
                 displayHolidays(data.response.holidays);
             })
             .catch(error => console.error('Error fetching holidays:', error));
     }
+    
+
+    const holidayTranslations = {
+        "New Year's Day": "Año Nuevo",
+        "Carnival / Shrove Monday": "Carnaval / Lunes de Carnaval",
+        "Carnival / Shrove Tuesday / Pancake Day": "Carnaval / Martes de Carnaval / Día de los Panqueques",
+        "Ramadan Start": "Comienzo del Ramadán",
+        "March Equinox": "Equinoccio de Marzo",
+        "Memorial Day": "Día de la Memoria",
+        "Maundy Thursday": "Jueves Santo",
+        "Good Friday": "Viernes Santo",
+        "Easter Sunday": "Domingo de Pascua",
+        "Tourist Bridge Holiday": "Feriado Puente Turístico",
+        "Day of the Veterans": "Día del Veterano y de los Caídos en la Guerra de Malvinas",
+        "End of Ramadan": "Fin del Ramadán",
+        "Passover Eve": "Víspera de la Pascua Judía",
+        "First day of Passover": "Primer Día de la Pascua Judía",
+        "Action Day for Tolerance and Respect between People": "Día de Acción por la Tolerancia y el Respeto entre los Pueblos",
+        "Second Day of Passover": "Segundo Día de la Pascua Judía",
+        "Sixth Day of Passover": "Sexto Día de la Pascua Judía",
+        "Seventh Day of Passover": "Séptimo Día de la Pascua Judía",
+        "Last day of Passover": "Último Día de la Pascua Judía",
+        "Labor Day / May Day": "Día del Trabajador",
+        "National Day/May 1810 Revolution": "Día de la Revolución de Mayo",
+        "Eid al-Adha": "Eid al-Adha",
+        "Commemoration of General Don Martín Miguel de Güemes": "Conmemoración del General Don Martín Miguel de Güemes",
+        "Flag Day": "Día de la Bandera",
+        "June Solstice": "Solsticio de Junio",
+        "Muharram/New Year": "Muharram / Año Nuevo Islámico",
+        "Independence day": "Día de la Independencia",
+        "San Martín Day": "Día de San Martín",
+        "September Equinox": "Equinoccio de Septiembre",
+        "Rosh Hashana Eve": "Víspera de Rosh Hashaná",
+        "Rosh Hashana": "Rosh Hashaná",
+        "Second Day of Rosh Hashana": "Segundo Día de Rosh Hashaná",
+        "Yom Kippur Eve": "Víspera de Yom Kipur",
+        "Day of Respect for Cultural Diversity": "Día del Respeto a la Diversidad Cultural",
+        "Yom Kippur": "Yom Kipur",
+        "Mothers' Day": "Día de la Madre",
+        "National Sovereignty Day": "Día de la Soberanía Nacional",
+        "Immaculate Conception": "Inmaculada Concepción",
+        "December Solstice": "Solsticio de Diciembre",
+        "Christmas Day": "Navidad",
+        "New Year's Eve": "Nochevieja"
+    };
+
 
     // Función para mostrar los feriados en el DOM
     function displayHolidays(holidays) {
@@ -40,7 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const list = document.createElement('ul');
         holidays.forEach(holiday => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${holiday.date.iso}: ${holiday.name}`;
+            const holidayName = holidayTranslations[holiday.name] || holiday.name;  // Traduce o usa el nombre original
+            listItem.textContent = `${holiday.date.iso}: ${holidayName}`;
             list.appendChild(listItem);
         });
 
@@ -137,11 +184,11 @@ const calendar = new FullCalendar.Calendar(calendarEl, {
                 const { event } = info;
                 return {
                     html: `
-                    <div style="display: flex; align-items: center;">
-                    <span class="container-event" style="width: 8px; height: 8px; background-color: ${event.backgroundColor}; border-radius: 50%; display: inline-block; margin-right: 3px;"></span>
-                    <span class="event-title" >${event.title}</span>
-                    </div>
-                    `
+    <div style="display: flex; align-items: center; width: 200px; overflow: hidden;">
+        <span class="container-event" style="width: 8px; height: 8px; background-color: ${event.backgroundColor}; border-radius: 50%; display: inline-block; margin-right: 3px;"></span>
+        <span class="event-title" style="display: inline-block; max-width: 180px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${event.title}</span>
+    </div>
+    `
                 };
             },
             eventClick: function(info) {
@@ -312,7 +359,7 @@ function renderEvents() {
         const isNear = diff.totalMilliseconds <= (24 * 60 * 60 * 1000) && diff.totalMilliseconds >= 0;
         const eventClass = isNear ? 'event-red' : 'event-custom'; // Usa clase CSS // Verifica el color
         return `
-        <div class="event ${eventClass}" id="event-${event.id} style="border-left: 5px solid ${event.color}; background-color: ${event.color};">
+        <div class="event ${eventClass}" id="event-${event.id}" style="border-left: 5px solid ${event.color};" "background-color: ${event.color};">
             <div class="days">
                 <span class="days-number">${diff.days}</span>
                 <span class="days-text">días</span>

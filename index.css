@@ -525,7 +525,7 @@ font-weight: 50px;
     @media (max-width: 480px) {
         #calendar {
             font-size: 10px;
-            width: 100%;
+            width: 80%;
         }
     
         .large-icon {
