@@ -12,92 +12,6 @@ const btn=document.querySelector("#btn")
 const offscreen=document.querySelector(".oof-screen")
 const bDelete=document.querySelector(".bDelete")
 
-document.addEventListener('DOMContentLoaded', function() {
-    const apiKey = 'ifamTbyBuzrl0n8BgPkqsjToHBRttsmB';  // Sustituye con tu clave API
-    const year = 2024;              // Año para el cual deseas obtener los feriados
-    const country = 'AR';           // Código del país (ejemplo: 'US' para Estados Unidos)
-
-    // Función para obtener los feriados de la API
-    function fetchHolidays() {
-        fetch(`https://calendarific.com/api/v2/holidays?api_key=${apiKey}&country=${country}&year=${year}&language=es`)
-            .then(response => response.json())
-            .then(data => {
-                displayHolidays(data.response.holidays);
-            })
-            .catch(error => console.error('Error fetching holidays:', error));
-    }
-    
-
-    const holidayTranslations = {
-        "New Year's Day": "Año Nuevo",
-        "Carnival / Shrove Monday": "Carnaval / Lunes de Carnaval",
-        "Carnival / Shrove Tuesday / Pancake Day": "Carnaval / Martes de Carnaval / Día de los Panqueques",
-        "Ramadan Start": "Comienzo del Ramadán",
-        "March Equinox": "Equinoccio de Marzo",
-        "Memorial Day": "Día de la Memoria",
-        "Maundy Thursday": "Jueves Santo",
-        "Good Friday": "Viernes Santo",
-        "Easter Sunday": "Domingo de Pascua",
-        "Tourist Bridge Holiday": "Feriado Puente Turístico",
-        "Day of the Veterans": "Día del Veterano y de los Caídos en la Guerra de Malvinas",
-        "End of Ramadan": "Fin del Ramadán",
-        "Passover Eve": "Víspera de la Pascua Judía",
-        "First day of Passover": "Primer Día de la Pascua Judía",
-        "Action Day for Tolerance and Respect between People": "Día de Acción por la Tolerancia y el Respeto entre los Pueblos",
-        "Second Day of Passover": "Segundo Día de la Pascua Judía",
-        "Sixth Day of Passover": "Sexto Día de la Pascua Judía",
-        "Seventh Day of Passover": "Séptimo Día de la Pascua Judía",
-        "Last day of Passover": "Último Día de la Pascua Judía",
-        "Labor Day / May Day": "Día del Trabajador",
-        "National Day/May 1810 Revolution": "Día de la Revolución de Mayo",
-        "Eid al-Adha": "Eid al-Adha",
-        "Commemoration of General Don Martín Miguel de Güemes": "Conmemoración del General Don Martín Miguel de Güemes",
-        "Flag Day": "Día de la Bandera",
-        "June Solstice": "Solsticio de Junio",
-        "Muharram/New Year": "Muharram / Año Nuevo Islámico",
-        "Independence day": "Día de la Independencia",
-        "San Martín Day": "Día de San Martín",
-        "September Equinox": "Equinoccio de Septiembre",
-        "Rosh Hashana Eve": "Víspera de Rosh Hashaná",
-        "Rosh Hashana": "Rosh Hashaná",
-        "Second Day of Rosh Hashana": "Segundo Día de Rosh Hashaná",
-        "Yom Kippur Eve": "Víspera de Yom Kipur",
-        "Day of Respect for Cultural Diversity": "Día del Respeto a la Diversidad Cultural",
-        "Yom Kippur": "Yom Kipur",
-        "Mothers' Day": "Día de la Madre",
-        "National Sovereignty Day": "Día de la Soberanía Nacional",
-        "Immaculate Conception": "Inmaculada Concepción",
-        "December Solstice": "Solsticio de Diciembre",
-        "Christmas Day": "Navidad",
-        "New Year's Eve": "Nochevieja"
-    };
-
-
-    // Función para mostrar los feriados en el DOM
-    function displayHolidays(holidays) {
-        const container = document.getElementById('holidays-container');
-        container.innerHTML = ''; // Limpiar el contenido previo
-
-        if (holidays.length === 0) {
-            container.innerHTML = '<p>No hay feriados disponibles para este año.</p>';
-            return;
-        }
-
-        const list = document.createElement('ul');
-        holidays.forEach(holiday => {
-            const listItem = document.createElement('li');
-            const holidayName = holidayTranslations[holiday.name] || holiday.name;  // Traduce o usa el nombre original
-            listItem.textContent = `${holiday.date.iso}: ${holidayName}`;
-            list.appendChild(listItem);
-        });
-
-        container.appendChild(list);
-    }
-
-    // Llamar a la función para obtener y mostrar los feriados
-    fetchHolidays();
-});
-
 buttonAdd.addEventListener("click",(e)=>{
 
     if(eventName.value && eventDate.value===""){
@@ -492,7 +406,6 @@ function updateCalendarEvents() {
 }
 
 
-
 loadEvents()
 function save(data) {
     localStorage.setItem("items",data);
@@ -513,5 +426,37 @@ window.addEventListener('load', () => {
 //Manejo del formulario para agregar eventos
 document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
-    
 }); 
+    
+    const swiper = new Swiper('.slider-wrapper', {
+    
+        loop: true,
+        grabCursor:true,
+        spaceBetween:30,
+      
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+          clickable:true,
+        },
+      
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+
+        breakpoints:{
+            0:{
+                slidesPerView:1
+            },
+            620:{
+                slidesPerView:2
+            },
+            1024:{
+                slidesPerView:3
+            }
+        }
+      
+     
+      });

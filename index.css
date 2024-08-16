@@ -1,11 +1,139 @@
 *{
     margin: 0px;
     text-decoration: none;
+    font-family: "Montserrat", sans-serif;
 }
 #calendar {
     max-width: 900px;
     margin: 0 auto;
+    text-decoration: none;
 }
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+
+}
+.slider-wrapper {
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 70px 55px;
+    height: 400px; 
+    
+}
+.card-list{
+    
+    margin-bottom: 450px;
+}
+.card-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #131313;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 35px;
+    backdrop-filter: blur(30px);
+    margin-bottom: 50px;
+    
+
+}
+p{
+    background-color: #fafafa;
+    border-radius: 5px;
+}
+.card-item {
+    position: relative; /* Necesario para posicionar el pseudo-elemento correctamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #131313;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 35px;
+    margin-bottom: 50px;
+}
+
+/* Pseudo-elemento para la imagen de fondo */
+.card-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Asegura que la imagen esté detrás del contenido */
+}
+
+/* Estilo específico para la tarjeta con la imagen de fondo */
+.enero::before {
+    background-image: url('ruta/a/tu/imagen.png'); /* Reemplaza con la ruta correcta */
+    opacity: 0.6; /* Ajusta la opacidad de la imagen de fondo */
+}
+
+.febrero::before {
+    background-image: url('ruta/a/tu/otra-imagen.png'); /* Reemplaza con la ruta correcta */
+    background-position: 50% 10%; /* Ajusta la posición verticalmente más abajo */
+}
+
+/* Asegúrate de que el texto y otros elementos dentro del .card-item no se vean afectados por la opacidad */
+.user-name {
+    color: #000000;
+    font-weight: bold;
+}
+
+.user-profession {
+    color: #000000; /* Ajusta el color del texto según sea necesario */
+}
+
+.slider-wrapper .swiper-pagination-bullet{
+    background:rgb(17, 29, 196) ;
+    height: 15px ;
+    width: 15px;
+}
+
+.slider-wrapper .swiper-slide-button{
+    color:rgb(17, 29, 196) ;
+    margin-top: -50px;
+}
+.slider-wrapper .swiper-slide-button:hover{
+    color: #000000;
+}
+.user-name{
+    color: #000000;
+    font-weight: bold;
+    
+
+}
+
+
+.enero::before {
+    background-image: url('png-transparent-friendship-day-human-biblical-magi-christmas-day-epiphany-text-january-song-christianity-Photoroom.png'); /* Reemplaza con la ruta correcta */
+    opacity: 0.6; /* Ajusta la opacidad de la imagen de fondo */
+}
+
+.febrero{
+    background-image: url(png-transparent-friendship-day-human-biblical-magi-christmas-day-epiphany-text-january-song-christianity-Photoroom\ \(1\).png);
+    background-position: 50% 10%; /* Ajusta la posición verticalmente más abajo (80%) y horizontalmente al centro (50%) */
+}
+
+
+
+
+
+
 img{
     width: 50px;
     
@@ -387,6 +515,9 @@ font-weight: 50px;
 }
 
 @media (max-width: 480px) {
+  
+    
+    
     .days{
         display: flex;
         flex-direction: column;
@@ -525,7 +656,7 @@ font-weight: 50px;
     @media (max-width: 480px) {
         #calendar {
             font-size: 10px;
-            width: 80%;
+            width: 90%;
         }
     
         .large-icon {
