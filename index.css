@@ -36,7 +36,7 @@
     align-items: center;
     text-align: center;
     color: #131313;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(46, 46, 46, 0.007);
     border-radius: 8px;
     border: 1px solid black;
     padding: 35px;
@@ -46,8 +46,8 @@
 
 }
 p{
-    background-color: #fafafa;
-    border-radius: 5px;
+   background-color: #fff2f2c9;
+   border-radius: 5px;
 }
 .card-item {
     position: relative; /* Necesario para posicionar el pseudo-elemento correctamente */
@@ -56,10 +56,8 @@ p{
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #131313;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(100, 100, 100, 0.993);
     border-radius: 8px;
-    border: 1px solid black;
     padding: 35px;
     margin-bottom: 50px;
 }
@@ -79,15 +77,73 @@ p{
 
 /* Estilo específico para la tarjeta con la imagen de fondo */
 .enero::before {
-    background-image: url('ruta/a/tu/imagen.png'); /* Reemplaza con la ruta correcta */
+    background-image: url('https://i.pinimg.com/564x/66/17/ce/6617ce70cc8c644e10bdd3dd4fbaa715.jpg'); /* Reemplaza con la ruta correcta */
     opacity: 0.6; /* Ajusta la opacidad de la imagen de fondo */
 }
 
 .febrero::before {
-    background-image: url('ruta/a/tu/otra-imagen.png'); /* Reemplaza con la ruta correcta */
+    background-image: url('https://i.pinimg.com/564x/f7/e7/13/f7e7131d455ffc3a0467709a1c3eaabf.jpg'); /* Reemplaza con la ruta correcta */
     background-position: 50% 10%; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+.marzo::before {
+    background-image: url('8518727.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: 50% 10%; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
 }
 
+.abril::before {
+    background-image: url('fea73797a9703e6a1d82202e05724c93.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: 50% 10%; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.mayo::before {
+    background-image: url('pORTADAS-CON-LOS-MESES-DEL-ANO-PARA-TUS-ALUMNOS-4.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.junio::before {
+    background-image: url('https://scontent.faep8-1.fna.fbcdn.net/v/t1.6435-9/61371619_10157106365389647_5488666375461273600_n.jpg?stp=dst-jpg_p526x296&_nc_cat=103&ccb=1-7&_nc_sid=13d280&_nc_ohc=aNIzhA0ydKEQ7kNvgFLKPBd&_nc_ht=scontent.faep8-1.fna&oh=00_AYBg3I7wlEpb3yj36XVWfz3UpAuRETG6Jj5SwCkMtYCesg&oe=66E74D4B'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.julio::before {
+    background-image: url('https://i.pinimg.com/564x/72/39/98/72399869768faf2e4cd0d18d6d30951d.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.agosto::before {
+    background-image: url('https://i.pinimg.com/564x/2c/59/ba/2c59ba5ae66ef18806824f47d7fd7bf0.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.septiembre::before {
+    background-image: url('https://i.pinimg.com/564x/02/cd/38/02cd386daee8407830e730361e98d72e.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.octubre::before {
+    background-image: url('https://i.pinimg.com/564x/ef/74/4f/ef744fcb4a1516dd13c1a10bbeb74013.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+
+.noviembre::before {
+    background-image: url('https://i.pinimg.com/736x/4c/7e/5c/4c7e5ce7387c96b26ea09bc76b3fcc3d.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
+.diciembre::before {
+    background-image: url('https://i.pinimg.com/564x/8b/9f/13/8b9f13af2449d34d8de6bbf3a6b30e40.jpg'); /* Reemplaza con la ruta correcta */
+    background-position: center; /* Ajusta la posición verticalmente más abajo */
+    opacity: 0.6;
+}
 /* Asegúrate de que el texto y otros elementos dentro del .card-item no se vean afectados por la opacidad */
 .user-name {
     color: #000000;
@@ -95,21 +151,25 @@ p{
 }
 
 .user-profession {
+  
+    font-size: 10px;
     color: #000000; /* Ajusta el color del texto según sea necesario */
+    font-weight: bold;
+    border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 .slider-wrapper .swiper-pagination-bullet{
-    background:rgb(17, 29, 196) ;
+    background:rgb(0, 0, 0) ;
     height: 15px ;
     width: 15px;
 }
 
 .slider-wrapper .swiper-slide-button{
-    color:rgb(17, 29, 196) ;
+    color:rgb(0, 0, 0) ;
     margin-top: -50px;
 }
 .slider-wrapper .swiper-slide-button:hover{
-    color: #000000;
+    color: #441df1;
 }
 .user-name{
     color: #000000;
@@ -119,15 +179,8 @@ p{
 }
 
 
-.enero::before {
-    background-image: url('png-transparent-friendship-day-human-biblical-magi-christmas-day-epiphany-text-january-song-christianity-Photoroom.png'); /* Reemplaza con la ruta correcta */
-    opacity: 0.6; /* Ajusta la opacidad de la imagen de fondo */
-}
 
-.febrero{
-    background-image: url(png-transparent-friendship-day-human-biblical-magi-christmas-day-epiphany-text-january-song-christianity-Photoroom\ \(1\).png);
-    background-position: 50% 10%; /* Ajusta la posición verticalmente más abajo (80%) y horizontalmente al centro (50%) */
-}
+
 
 
 
