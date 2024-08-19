@@ -275,8 +275,8 @@ function renderEvents() {
 
         const isRainy = event.weather && event.weather.description.toLowerCase().includes('rain');
         const isCloudy = event.weather && event.weather.description.toLowerCase().includes('cloud');
-        console.log(event.weather.description)
-        console.log(isRainy)
+        
+   
         return `
         <div class="event ${eventClass}" id="event-${event.id}" style="border-left: 5px solid ${event.color};">
             <div class="days">
