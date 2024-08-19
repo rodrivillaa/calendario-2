@@ -272,8 +272,13 @@ function renderEvents() {
         console.log(`Color del evento (${event.id}): ${event.color}`);
         const isNear = diff.totalMilliseconds <= (24 * 60 * 60 * 1000) && diff.totalMilliseconds >= 0;
         const eventClass = isNear ? 'event-red' : 'event-custom'; // Usa clase CSS // Verifica el color
+
+        const isRainy = event.weather && event.weather.description.toLowerCase().includes('rain');
+        const isCloudy = event.weather && event.weather.description.toLowerCase().includes('cloud');
+        console.log(event.weather.description)
+        console.log(isRainy)
         return `
-        <div class="event ${eventClass}" id="event-${event.id}" style="border-left: 5px solid ${event.color};" "background-color: ${event.color};">
+        <div class="event ${eventClass}" id="event-${event.id}" style="border-left: 5px solid ${event.color};">
             <div class="days">
                 <span class="days-number">${diff.days}</span>
                 <span class="days-text">días</span>
@@ -306,6 +311,19 @@ function renderEvents() {
                 <span>${event.weather.temp}°C, ${event.weather.description}</span>
             </div>
             ` : ''}
+           ${isRainy ? `
+        <div class="rain">
+            ${Array.from({length: 50}).map((_, i) => `<div class="raindrop" style="left: ${Math.random() * 100}%; animation-delay: ${Math.random() * 2}s;"" ></div>`).join('')}
+        </div>
+        ` : ''}
+        ${isCloudy ? `
+        <div class="clouds">
+   
+    <img src="nubes-tormenta.jpg" class="cloud">
+   
+</div>
+` : ''}
+     
             <div class="actions">
                 <button class="bDelete" data-id="${event.id}"><i class="bi bi-trash custom-icon"></i></button>
             </div>
@@ -315,6 +333,7 @@ function renderEvents() {
 
         
     })
+   
 
     eventContainer.innerHTML=eventsHTML.join("");
     if(renderEvents===""){
