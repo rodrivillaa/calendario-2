@@ -30,6 +30,7 @@
         </style>
 </head>
 <body>
+    <h1>swsw</h1>
     <div class="oof-screen">
         <ul class="hamburguer">
             <a href="index.html">        
@@ -55,7 +56,6 @@
         
     </header>
 
-</head>
 <body>
    
     <div class="container swiper">
@@ -193,14 +193,29 @@
                     
                     <button id="openForm" class="btn-open" onclick="window.location.href='calendario.html'"><i class="bi bi-plus-lg custom-i"></i></button>
 
+                    <h1>Prueba de Notificaciones Push</h1>
+                    <button id="request-notification-permission">Solicitar Permiso de Notificación</button>
+
     </div>
 </div>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                console.log('Service Worker registrado con éxito:', registration);
+            }, function(err) {
+                console.log('Error al registrar el Service Worker:', err);
+            });
+        });
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <!-- FullCalendar JS -->
 
      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="script.js"></script>
+    <script src="sw.js"></script>
  
 </body>
 </html>

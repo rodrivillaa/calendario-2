@@ -1,5 +1,66 @@
 
+if (Notification.permission === 'default') {
+    Notification.requestPermission().then(function (permission) {
+        if (permission === "granted") {
+            console.log("Permiso de notificaciones concedido");
+             // Suscribirse al push manager
+             subscribeUserToPush();
+        }
+    });
+}
 //donde voy a guardar toda la informacion de mi9s eventos
+function subscribeUserToPush() {
+    console.log("Intentando suscribir al usuario...");
+    navigator.serviceWorker.ready.then(function(registration) {
+        console.log("Service Worker listo para suscripciones");
+        // Aquí colocas tu clave pública VAPID del servidor
+        const applicationServerKey = urlBase64ToUint8Array('BPNpkbBph-CQeyn5rOAWohgCitrTOQ1u68z_gmTgVMoQ5sHSVLHfHbhOTn4fvQYnMKr04GppK85bHkcye9VjWmE');
+        
+        registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: applicationServerKey
+        }).then(function(subscription) {
+            console.log('Usuario suscrito:', subscription);
+
+            // Envía la suscripción a tu servidor
+            sendSubscriptionToServer(subscription);
+        }).catch(function(error) {
+            console.error('Error al suscribir al usuario:', error);
+        });
+    });
+}
+function sendSubscriptionToServer(subscription) {
+    fetch('http://localhost:3000/subscribe', { // La URL de tu servidor donde manejarás la suscripción
+        method: 'POST',
+        body: JSON.stringify(subscription),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Error al suscribir en el servidor.');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Suscripción almacenada en el servidor:', data);
+    }).catch(error => {
+        console.error('Error al enviar la suscripción al servidor:', error);
+    });
+}
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
 let events=[];
 let arr=[];//caragar informacion
 
@@ -11,6 +72,11 @@ const eventContainer=document.querySelector("#eventsContainer");
 const btn=document.querySelector("#btn")
 const offscreen=document.querySelector(".oof-screen")
 const bDelete=document.querySelector(".bDelete")
+
+
+
+
+
 
 buttonAdd.addEventListener("click",(e)=>{
 
