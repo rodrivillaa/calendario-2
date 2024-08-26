@@ -10,6 +10,8 @@ const urlsToCache = [
     '/index.html',
     '/index.css',
     '/script.js',
+    '/server.js',
+    '/sw.js',
     '/icons/MIY_Mesa de trabajo 1.png',
     'https://cdn.jsdelivr.net/npm/fullcalendar@6.0.0/dist/index.global.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
@@ -66,21 +68,6 @@ self.addEventListener('activate', function(event) {
     );
 });
 
-/* elf.addEventListener('push', event => {
-    console.log('Push event received:', event);
-  
-    const data = event.data ? event.data.json() : { title: 'Default Title', body: 'Default Body' };
-  
-    const options = {
-      body: data.body,
-    
-    };
-  
-    event.waitUntil(
-      self.registration.showNotification(data.title, options)
-    );
-  });  
- */
   // service-worker.js
 self.addEventListener('push', event => {
     const data = event.data.json();

@@ -20,16 +20,14 @@ const vapidKeys = {
 };
 
 webpush.setVapidDetails(
-    'mailto:rodrivillaa23@gmail.com', // Cambia esto por tu dirección de correo electrónico
-    vapidKeys.publicKey,
-    vapidKeys.privateKey
-);
+    'mailto:rodrivillaa23@gmail.com',vapidKeys.publicKey,vapidKeys.privateKey);
+    module.exports=webpush;
 
 app.get('/', (_, res) => {
     res.send('Bienvenido al servidor de suscripciones.');
 });
 
-app.post('/subscribe', (req, res) => {
+app.post('/subscription', (req, res) => {
     console.log('Solicitud POST recibida en /subscribe');
     console.log('Cuerpo de la solicitud:', req.body);
     const subscription = req.body;

@@ -79,30 +79,7 @@ const bDelete=document.querySelector(".bDelete")
 
 
 
-buttonAdd.addEventListener("click",(e)=>{
 
-    if(eventName.value && eventDate.value===""){
-        Swal.fire({
-            position: "center",
-            icon: "warning",
-            title: "Por favor completa todos los campos!",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        
-        
-    }else{
-
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your work has been saved",
-            showConfirmButton: false,
-            timer: 1500
-          });
-
-    }
-})
 
 btn.addEventListener("click",()=>{
     offscreen.classList.toggle("active")
@@ -154,31 +131,7 @@ async function getWeather(eventDate) {
 
 
 
-// Inicializar FullCalendar
-const calendarEl = document.getElementById('calendar');
-const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            timeZone: 'America/Argentina/Buenos_Aires', 
-            events: [],
-         // Aquí se cargarán los eventos
-            eventContent: function(info) {
-                const { event } = info;
-                return {
-                    html: `
-    <div style="display: flex; align-items: center; width: 200px; overflow: hidden;">
-        <span class="container-event" style="width: 8px; height: 8px; background-color: ${event.backgroundColor}; border-radius: 50%; display: inline-block; margin-right: 3px;"></span>
-        <span class="event-title" style="display: inline-block; max-width: 180px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${event.title}</span>
-    </div>
-    `
-                };
-            },
-            eventClick: function(info) {
-                // Mostrar detalles del evento al hacer clic
-                alert('Evento: ' + info.event.title);
-            }
-            
-        });
-        calendar.render();
+
 
 //guardar en el localstorage
 function loadEvents() {
@@ -192,16 +145,9 @@ events= arr?[...arr]:[];
 
 // Renderizar eventos y establecer actualizaciones en tiempo real
 renderEvents();
-updateCalendarEvents();
 setInterval(updateEventTimes, 1000); }// Actualizar cada segundo
 
 
-document.querySelector("form").addEventListener("submit",(e)=>{
-    e.preventDefault();
-    addEvent(); // Asegúrate de llamar a addEvent() en el submit
-    
-    
-});
 
 async function addEvent() {
     if(eventName.value === "" || eventDate.value === "") {
@@ -455,40 +401,6 @@ function updateEventTimes() {
             eventElement.querySelector('.time-number:nth-of-type(3)').textContent = diff.seconds;
         }
     });
-}
-function updateCalendarEvents() {
-   calendar.getEvents().forEach(event => event.remove());
-
-    // Obtener la fecha y hora actual
-    const now = new Date();
-
-    // Agregar eventos al calendario
-    calendar.addEventSource(events.map(event => {
-        // Crear un objeto Date con la fecha y hora del evento
-        const eventDateTime = new Date(`${event.date}T${event.time}:00-03:00`);
-        
-        // Calcular la diferencia en milisegundos
-        const timeDiff = eventDateTime - now;
-        
-        // Determinar si el evento está a un día o menos
-        const isNear = timeDiff <= (24 * 60 * 60 * 1000) && timeDiff >= 0; // 1 día en milisegundos
-
-        // Elegir el color de fondo según la proximidad del evento
-        const color = isNear ? 'red' : (event.color || '#ff9f00');
-
-        return {
-            id: event.id,
-            title: event.name,
-            start: `${event.date}T${event.time}:00-03:00`,
-            allDay: false,
-            backgroundColor: color, // Cambiar el color de fondo
-            borderColor: color,
-            textColor: '#000000' // Color del texto
-        };
-    }));
-
-    // Volver a renderizar el calendario
-    calendar.render();
 }
 
 
